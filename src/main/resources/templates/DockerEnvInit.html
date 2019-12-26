@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: htmlhead" th:with="title='Docker envInit'"></head>
+r
+  <body>
+    <div th:replace="layout :: navbar">(navbar)</div>
+
+    <div class="container">
+      <form id="form" action="/generating" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Operating System</label>
+          <select class="form-control" id="exampleFormControlSelect1" name="OS">
+            <option selected>Choose...</option>
+            <option>alpine</option>
+            <option>boot2docker/boot2docker</option>
+            <option>ubuntu</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="containerPort">Container Port</label>
+          <input type="text" class="form-control" id="containerPort" placeholder="4396" name="containerPort">
+        </div>
+        <div class="form-group">
+          <label for="hostPort">Host Port</label>
+          <input type="text" class="form-control" id="hostPort" placeholder="4396" name="hostPort">
+        </div>
+        <div class="form-group">
+          <label for="projectPath">Path to the project</label>
+          <input type="text" class="form-control" id="projectPath" placeholder="Enter the absolute path, either start with ~ or \ " name="path">
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="unconfined">
+          <label class="form-check-label" for="defaultCheck1">
+            seccomp unconfined (Need to be enabled if you need to use gdb)
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="alert alert-warning" role="alert" align="center">
+          <span th:text="${errorMessage}">(time)</span>
+        </div>
+      </form>
+    </div>
+
+    <div th:include="layout :: footer" id="footer">(footer)</div>
+
+  </body>
+</html>
